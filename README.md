@@ -1,12 +1,8 @@
-Final Project : Turn Base Game
-Anggota Kelompok : 
-1. Bhenarezky Suranta Ginting (231401003)
-2. Alfathan Bagas Kurnia (231401012)
-3. Muhammad Ariiq alhafizh Agung (231401054)
+# Final Project<br>Turn Base Game
+### Anggota Kelompok : <br>1. Bhenarezky Suranta Ginting (231401003)<br>2. Alfathan Bagas Kurnia (231401012)<br>3. Muhammad Ariiq alhafizh Agung (231401054)
 
    
-   Tutorial
-   =================
+## Tutorial
 1. game ini bersifat turn-based yang mana player dan musuh akan bergantian untuk menyerang;
 
 2. musuh mendapat giliran pertama untuk menyerang
