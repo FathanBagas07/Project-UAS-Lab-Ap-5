@@ -485,12 +485,12 @@ int main() {
         }
     }
 
-    credit.nama.push_back("Herby Mirraldi Syahputra");
-    credit.nim.push_back("1911102441007");
-    credit.nama.push_back("Irfan Afifi Firdaus");
-    credit.nim.push_back("1911102441019");
-    credit.nama.push_back("Khusna Arofah");
-    credit.nim.push_back("1911102441020");
+    credit.nama.push_back("Alfathan Bagas Kurnia");
+    credit.nim.push_back("231401012");
+    credit.nama.push_back("Muhammad Ariiq Alhafizh Agung");
+    credit.nim.push_back("231401054");
+    credit.nama.push_back("Bhenarezky Suranta Ginting");
+    credit.nim.push_back("231401003");
 
     system("cls");
     cout << endl;
