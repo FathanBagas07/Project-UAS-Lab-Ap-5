@@ -6,7 +6,7 @@ Anggota Kelompok :
 
    
    Tutorial
-=================
+   =================
 1. game ini bersifat turn-based yang mana player dan musuh akan bergantian untuk menyerang;
 
 2. musuh mendapat giliran pertama untuk menyerang
