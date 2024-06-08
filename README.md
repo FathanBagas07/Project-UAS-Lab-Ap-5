@@ -16,3 +16,7 @@
 5. menggunakan item di dalam inventory terhitung 1 turn
 
 6. player menang jika dapat menghabisi darah lawan
+
+## Screanshot
+
+## Link Video
