@@ -16,3 +16,9 @@
 5. menggunakan item di dalam inventory terhitung 1 turn
 
 6. player menang jika dapat menghabisi darah lawan
+
+
+## Screenshot
+![image](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/f7742498-ce43-4e94-9095-971d7b17763e)
+
+## Link Video
