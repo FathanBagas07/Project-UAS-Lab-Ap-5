@@ -76,19 +76,19 @@ void garis_panjang() {
 int damage_player(Player player, Inventory item) {
     switch (player.skill) {
         case 1:
-            if (item.buff) {
+            if (item.buff == true) {
                 return 17;
             } else {
                 return 15;
             }
         case 2:
-            if (item.buff) {
+            if (item.buff == true) {
                 return 29;
             } else {
                 return 24;
             }
         case 3:
-            if (item.buff) {
+            if (item.buff == true) {
                 return 24;
             } else {
                 return 20;
