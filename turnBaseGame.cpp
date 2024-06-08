@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
@@ -33,9 +34,8 @@ struct Player {
 };
 
 struct Credit {
-    string nama[4];
-    string nim[4];
-    int panjang;
+    vector<string> nama;
+    vector<string> nim; 
 };
 
 Musuh musuh;
@@ -485,27 +485,34 @@ int main() {
         }
     }
 
-    credit.nama[0] = "Muhammad Ariiq Alhafizh Agung";
-    credit.nama[1] = "Alfathan Bagas Kurnia";
-    credit.nama[2] = "Bhenarezky Suranta Ginting";
-
-    credit.nim[0] = "231401054";
-    credit.nim[1] = "231401012";
-    credit.nim[2] = "231401003";
-
-    credit.panjang = 29;
+    credit.nama.push_back("Herby Mirraldi Syahputra");
+    credit.nim.push_back("1911102441007");
+    credit.nama.push_back("Irfan Afifi Firdaus");
+    credit.nim.push_back("1911102441019");
+    credit.nama.push_back("Khusna Arofah");
+    credit.nim.push_back("1911102441020");
 
     system("cls");
-
-    cout << "                           CREDIT" << endl;
-    garis_credit();
-    for (int i = 0; i < 4; i++) {
-        cout << "|" << credit.nama[i];
-        for (int j = 0; j < credit.panjang - credit.nama[i].length() + 18; j++) {
-            cout << " ";
-        }
-        cout << credit.nim[i] << "|" << endl;
+    cout << endl;
+    cout << '|';
+    for (int i = 1; i <= 25; i++) {
+        cout << ' ';
     }
+    cout << "CREDIT";
+    for (int i = 1; i <= 25; i++) {
+        cout << ' ';
+    }
+    cout << '|' << endl;
     garis_credit();
+
+    for (size_t i = 0; i < credit.nama.size(); ++i) {
+        cout << "  " << credit.nama[i] << endl;
+        cout << "  " << credit.nim[i] << endl;
+        cout << endl;
+    }
+
+    garis_credit();
+    system("pause");
+
     return 0;
 }
