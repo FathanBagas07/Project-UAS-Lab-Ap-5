@@ -431,7 +431,7 @@ int main() {
         do {
             player.lanjut = false;
             player_turn();
-        } while (!player.lanjut);
+        } while (player.lanjut == true);
 
         if (musuh.darah <= 0) {
             system("cls");
@@ -444,7 +444,7 @@ int main() {
         do {
             musuh.lanjut = false;
             musuh_turn();
-        } while (!musuh.lanjut);
+        } while (musuh.lanjut == true);
 
         if (player.darah <= 0) {
             system("cls");   
