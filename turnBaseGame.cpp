@@ -20,6 +20,7 @@ struct Musuh {
     int turn;
     int passive;
     bool lanjut;
+    int damage_history[10]; // Menambahkan array untuk menyimpan sejarah damage
 };
 
 struct Player {
@@ -31,6 +32,7 @@ struct Player {
     int turn;
     int shield;
     int passive;
+    int damage_history[10]; // Menambahkan array untuk menyimpan sejarah damage
 };
 
 struct Credit {
@@ -268,232 +270,105 @@ void player_turn() {
             }
             break;
         default:
-            cout << "item tidak tersedia" << endl;
+            cout << "tidak valid" << endl;
+            system("pause");
             player.lanjut = true;
             break;
     }
+    player.lanjut = true;
 }
 
 void musuh_turn() {
+    srand(time(NULL));
     system("cls");
-    cout << "invader" << "        health: " << musuh.darah << endl;
-    cout << "charge count: " << musuh.charge << "        turn " << musuh.turn << endl;
     garis_panjang();
-    cout << "passive:" << endl << endl;
-    cout << "1. semakin sekarat, damage invader akan semakin meningkat" << endl;
-    cout << "2. sekali dalam pertarungan, ketika darah invader mencapai dibawah 20," << endl;
-    cout << "   invader akan melancarkan serangan 2x (turn player akan di-skip)" << endl;
+    cout << "turn musuh" << endl;
+    cout << "health: " << musuh.darah << "       charge count: " << musuh.charge << endl;
     garis_panjang();
-    cout << "skill aktif:" << endl << endl;
-    cout <<
-    "1. pukulan: serangan biasa, memberikan 10 - 35 damage" << endl << endl;
-    cout << "2. pentungan: ketika charge count menjadi 2, invader dapat mengambil pentungan dan memberikan 20 - 45 damage" << endl << endl;
-    cout << "3. jamu: ramuan herbal kesehatan, musuh memulihkan 10 HP" << endl;
-    garis_panjang();
-    cout << "tekan kunci apapun untuk melihat serangan musuh" << endl;
-    system("pause");
-    cout << endl;
-
-    if (musuh.passive != 0 && musuh.darah < 20) {
-        if (musuh.passive == 2 && musuh.charge < 2) {
-            musuh.skill = 1;
-            musuh.passive -= 1;
-            musuh.lanjut = true;
-        } else if (musuh.passive == 2 && musuh.charge >= 2) {
-            musuh.skill = 2;
-            musuh.passive -= 1;
-            musuh.lanjut = true;
-        } else if (musuh.passive == 1) {
-            musuh.skill = 3;
-            musuh.passive -= 1;
-        }
-    } else if (musuh.charge >= 2 && musuh.darah < 70) {
-        musuh.skill = rand() % 1 + 2;
-    } else if (musuh.charge >= 2 && musuh.darah >= 70) {
-        musuh.skill = 2;
-    } else if (musuh.darah < 70 && musuh.charge < 4) {
-        musuh.skill = rand() % 2 + 1;
-        if (musuh.skill == 2) musuh.skill = 3;
-    } else {
-        musuh.skill = 1;
-    }
-
+    musuh.skill = rand() % 2 + 1;
     switch (musuh.skill) {
         case 1:
-            if (musuh.passive != 0 && musuh.darah < 20) {
-                cout << "invader tak menyangka bahwa dia akan dipojokkan." << endl;
-                cout << "tak ada pilihan lain, invader akhirnya mengeluarkan kartu AS nya " << endl << endl;
-                cout << "FREZEEE!!!" << endl;
-                cout << "player tidak bisa menyerang setelah ini" << endl << endl;
-            }
+            player.darah -= damage_musuh(musuh);
             musuh.turn += 1;
             musuh.charge += 1;
-            player.passive = rand() % 100 + 1;
-            if (player.passive < 20) {
-                cout << "PERFECT PARRY!!!" << endl;
-                cout << "knight berhasil menahan pukulan musuh" << endl;
-            } else {
-                player.darah = player.darah + player.shield - damage_musuh(musuh);
-                if (player.darah >= 100) {
-                    temp = player.darah;
-                    player.darah = 100;
-                    player.shield = temp - player.darah;
-                    cout << "invader menggunakan pukulan, shield player berkurang menjadi " << player.shield << endl;
-                } else if (player.darah < 0) {
-                    player.darah = 0;
-                    cout << "invader menggunakan pukulan, darah player berkurang menjadi " << player.darah << endl;
-                } else if (player.darah < 100) {
-                    player.shield = 0;
-                    cout << "invader menggunakan pukulan, darah player berkurang menjadi " << player.darah << endl;
-                }
+            if (player.darah < 0) {
+                player.darah = 0;
             }
+            cout << "musuh menggunakan normal attack, darah player berkurang menjadi " << player.darah << endl;
+            system("pause");
             break;
         case 2:
-            if (musuh.passive != 0 && musuh.darah < 20) {
-                cout << "invader tak menyangka bahwa dia akan dipojokkan." << endl;
-                cout << "tak ada pilihan lain, invader akhirnya mengeluarkan kartu AS nya " << endl << endl;
-                cout << "FREZEEE!!!" << endl;
-                cout << "player tidak bisa menyerang setelah ini" << endl << endl;
-            }
-            musuh.charge -= 2;
-            musuh.turn += 1;
-            player.passive = rand() % 100 + 1;
-            if (player.passive < 20) {
-                cout << "PERFECT PARRY!!!" << endl;
-                cout << "knight berhasil menahan pentungan" << endl;
-            } else {
+            if (musuh.charge >= 3) {
                 player.darah -= damage_musuh(musuh);
-                if (player.darah >= 100) {
-                    temp = player.darah;
-                    player.darah = 100;
-                    player.shield = temp - player.darah;
-                    cout << "makan ni pentungan cok!!!" << endl << endl;
-                    cout << "musuh menggunakan pentungan, darah player berkurang menjadi " << player.shield << endl;
-                } else if (player.darah < 0) {
+                musuh.turn += 1;
+                musuh.charge -= 3;
+                if (player.darah < 0) {
                     player.darah = 0;
-                    cout << "makan ni pentungan cok!!!" << endl << endl;
-                    cout << "musuh menggunakan pentungan, darah player berkurang menjadi " << player.darah << endl;
-                } else if (player.darah < 100) {
-                    player.shield = 0;
-                    cout << "makan ni pentungan cok!!!" << endl << endl;
-                    cout << "musuh menggunakan pentungan, darah player berkurang menjadi " << player.darah << endl;
                 }
+                cout << "musuh menggunakan skill spesial, darah player berkurang menjadi " << player.darah << endl;
+                system("pause");
+            } else {
+                musuh_turn();
             }
             break;
-        case 3:
-            if (musuh.darah < 80) {
-                musuh.darah += 20;
-                musuh.turn += 1;
-                musuh.charge += 1;
-                cout << "enak kali jamu ini bah" << endl << endl;
-                cout << "musuh menggunakan jamu, darah musuh bertambah menjadi " << musuh.darah << endl;
-            }
+        default:
+            cout << "musuh tidak valid" << endl;
+            system("pause");
             break;
     }
-    system("pause");
+    player.lanjut = true;
 }
 
 int main() {
-    loading_screen:
-    system("cls");
-    srand(time(0));
+    player.lanjut = false;
+    cout << "Masukkan nama karakter: ";
+    getline(cin, player.nama);
     player.darah = 100;
-    player.shield = 50;
     player.charge = 0;
     player.turn = 1;
-    item.health = 4;
-    item.strength = 2;
-
+    player.shield = 0;
+    player.passive = 0;
     musuh.darah = 100;
     musuh.charge = 0;
     musuh.turn = 1;
-    musuh.passive = 2;
-
-    title = "COLOSSEUM OF FOOLS";
-    ptr_title = &title;
-
-    garis_pendek();
-    cout << "       " << *ptr_title << endl;
-    garis_pendek();
-    cout << endl;
-    cout << "tekan kunci apapun untuk memulai" << endl;
-    system("pause");
-    cout << "Nama Player: ";
-    cin >> player.nama;
-    system("cls");
-    ;
-    cout << "                                               TUTORIAL" << endl;
-    garis_panjang();
-    cout << "1. game ini bersifat turn-based yang mana player dan musuh akan bergantian untuk menyerang;" << endl << endl;
-    cout << "2. player mendapat giliran pertama untuk menyerang" << endl << endl;
-    cout << "3. player memiliki 2 tipe skill, skill passive dan skill active. skill passive akan berjalan apabila" << endl;
-    cout << "   kondisi terpenuhi, sedangkan skill aktif dapat langsung dipilih oleh player" << endl << endl;
-    cout << "4. charge count: charge count adalah parameter apakah suatu skill dapat digunakan. charge count akan" << endl;
-    cout << "   terisi 1 setiap turn" << endl << endl;
-    cout << "5. menggunakan item di dalam inventory terhitung 1 turn" << endl << endl;
-    cout << "6. player menang jika dapat menghabisi darah lawan" << endl;
-    garis_panjang();
-    cout << "tekan kunci apapun untuk memulai game"; 
-    system("pause");
-
-    do {
-        do {
-            player.lanjut = false;
-            player_turn();
-        } while (player.lanjut == true);
-
-        if (musuh.darah <= 0) {
-            system("cls");
-            cout << "   CONGRATULATIONS, YOU WIN!!!" << endl; 
-            garis_pendek();
-            system("pause");
-            break;
-        }
-
-        do {
-            musuh.lanjut = false;
-            musuh_turn();
-        } while (musuh.lanjut == true);
-
-        if (player.darah <= 0) {
-            system("cls");   
-            cout << "       YOU ARE DEAD !!!" << endl;
-            garis_pendek();  
-            system("pause");
-            break;
-        }
-    } while (true); 
-
-    if (player.darah <= 0) {
-        cout << endl;
-        cout << "wanna try again ? (Y/T)"; 
-        cin >> back;
-        back = toupper(back);
-        if (back == 'Y') {
-            goto loading_screen;
-        }
-        if (back == 'T') {
-            cout << endl;
-            cout << "skill issue" << endl;
-            system("pause");
-        }
-    } else if (musuh.darah <= 0) {
-        cout << endl;
-        cout << "A true fool keeps on fighting, even when there is no more glory to be gained" << endl;
-        cout << "Step over to a board and make your mark! Show us how invaderish you truly are!" << endl;
-        cout << "wanna try again ? (Y/T)"; 
-        cin >> back;
-        back = toupper(back);
-        if (back == 'Y') {
-            goto loading_screen;
-        }
-        if (back == 'T') {
-            cout << endl;
-            cout << "You placed your mark and left! What cowardice! Maybe you dont have what it takes?" << endl;
-            cout << "A true warrior strides unstopping into battle. They gain strength by vanquishing others, not in flight from them." << endl;
-        }
+    item.health = 3;
+    item.strength = 1;
+    item.buff = false;
+    musuh.passive = 0;
+    while (musuh.darah > 0 && player.darah > 0) {
+        player_turn();
+        musuh_turn();
     }
-
+    if (musuh.darah <= 0) {
+        system("cls");
+        cout << player.nama << " menang!" << endl;
+        cout << "Press 'b' to continue: ";
+        cin >> back;
+    } else if (player.darah <= 0) {
+        system("cls");
+        cout << "musuh menang!" << endl;
+        cout << "Press 'b' to continue: ";
+        cin >> back;
+    }
+    system("cls");
+    title = " CREDIT ";
+    ptr_title = &title;
+    cout << "|";
+    for (i = 1; i <= 56; i++) {
+        cout << "=";
+    }
+    cout << "|" << endl;
+    cout << "|" << title;
+    for (i = 1; i <= 56 - (*ptr_title).length(); i++) {
+        cout << " ";
+    }
+    cout << "|" << endl;
+    cout << "|";
+    for (i = 1; i <= 56; i++) {
+        cout << "=";
+    }
+    cout << "|" << endl;
+    cout << "| Anggota Kelompok 7:                                        |" << endl;
     credit.nama.push_back("Alfathan Bagas Kurnia");
     credit.nim.push_back("231401012");
     credit.nama.push_back("Muhammad Ariiq Alhafizh Agung");
@@ -501,27 +376,14 @@ int main() {
     credit.nama.push_back("Bhenarezky Suranta Ginting");
     credit.nim.push_back("231401003");
 
-    system("cls");
-    cout << endl;
-    cout << '|';
-    for (int i = 1; i <= 25; i++) {
-        cout << ' ';
-    }
-    cout << "CREDIT";
-    for (int i = 1; i <= 25; i++) {
-        cout << ' ';
-    }
-    cout << '|' << endl;
-    garis_credit();
-
     for (size_t i = 0; i < credit.nama.size(); ++i) {
         cout << "  " << credit.nama[i] << endl;
         cout << "  " << credit.nim[i] << endl;
         cout << endl;
     }
-
     garis_credit();
-    system("pause");
-
+    cout << "| Dosen Pengampu:                                            |" << endl;
+    cout << "| Dr. Lukito Edi Nugroho, M.Sc.                              |" << endl;
+    garis_credit();
     return 0;
 }
