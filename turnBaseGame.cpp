@@ -100,11 +100,11 @@ int damage_musuh(Musuh musuh) {
     switch (musuh.skill) {
         case 1:
             if (musuh.darah < 20) {
-                return 35;
+                return 30;
             } else if (musuh.darah < 30) {
-                return 25;
+                return 23;
             } else if (musuh.darah < 50) {
-                return 20;
+                return 19;
             } else if (musuh.darah < 65) {
                 return 15;
             } else if (musuh.darah < 100) {
@@ -112,15 +112,15 @@ int damage_musuh(Musuh musuh) {
             }
         case 2:
             if (musuh.darah < 20) {
-                return 45;
+                return 32;
             } else if (musuh.darah < 30) {
-                return 35;
+                return 28;
             } else if (musuh.darah < 50) {
-                return 30;
-            } else if (musuh.darah < 65) {
                 return 25;
+            } else if (musuh.darah < 65) {
+                return 22;
             } else if (musuh.darah < 100) {
-                return 20;
+                return 15;
             }
     }
 }
