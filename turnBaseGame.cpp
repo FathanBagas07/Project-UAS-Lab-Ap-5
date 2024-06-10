@@ -77,19 +77,19 @@ int damage_player(Player player, Inventory item) {
     switch (player.skill) {
         case 1:
             if (item.buff == true) {
-                return 17;
+                return 27;
             } else {
                 return 15;
             }
         case 2:
             if (item.buff == true) {
-                return 29;
+                return 35;
             } else {
-                return 24;
+                return 23;
             }
         case 3:
             if (item.buff == true) {
-                return 24;
+                return 32;
             } else {
                 return 20;
             }
@@ -100,27 +100,27 @@ int damage_musuh(Musuh musuh) {
     switch (musuh.skill) {
         case 1:
             if (musuh.darah < 20) {
-                return 30;
+                return 35;
             } else if (musuh.darah < 30) {
-                return 23;
+                return 17;
             } else if (musuh.darah < 50) {
-                return 19;
-            } else if (musuh.darah < 65) {
                 return 15;
+            } else if (musuh.darah < 65) {
+                return 13;
             } else if (musuh.darah < 100) {
                 return 10;
             }
         case 2:
             if (musuh.darah < 20) {
-                return 32;
+                return 45;
             } else if (musuh.darah < 30) {
-                return 28;
+                return 33;
             } else if (musuh.darah < 50) {
-                return 25;
+                return 30;
             } else if (musuh.darah < 65) {
-                return 22;
+                return 27;
             } else if (musuh.darah < 100) {
-                return 15;
+                return 24;
             }
     }
 }
@@ -132,7 +132,7 @@ void player_turn() {
     cout << "turn " << player.turn << "       charge count: " << player.charge << endl;
     garis_panjang();
     cout << "passive:" << endl << endl;
-    cout << "perfect parry: mempunyai 10% chance untuk menghindari serangan lawan" << endl;
+    cout << "perfect parry: mempunyai 20% chance untuk menghindari serangan lawan" << endl;
     garis_panjang();
     cout << "skill aktif:" << endl << endl;
     cout << "1. normal attack: knight mengayunkan pedangnya untuk menyerang, memberikan 15 damage" << endl << endl;
@@ -154,6 +154,10 @@ void player_turn() {
                 musuh.darah = 0;
             }
             cout << player.nama << " mengunakan normal attack, darah musuh berkurang menjadi " << musuh.darah << endl;
+
+            if (item.buff==true ){
+                item.buff=false;
+            }
             system("pause");
             break;
         case 2:
@@ -166,9 +170,10 @@ void player_turn() {
                 }
                 cout << "ORAAAA!!!!!" << endl << endl;
                 cout << player.nama << " mengunakan great slash, mengurangi darah musuh menjadi " << musuh.darah << endl;
-                system("pause");
-                        cout << "ORAAAA!!!!!" << endl << endl;
-                cout << player.nama << " mengunakan great slash, mengurangi darah musuh menjadi " << musuh.darah << endl;
+              
+                if (item.buff==true ){
+                    item.buff=false;
+                }
                 system("pause");
             } else {
                 cout << "charge count tidak cukup" << endl;
@@ -186,6 +191,10 @@ void player_turn() {
                 }
                 cout << "ZRASHHH!!!" << endl << endl;
                 cout << player.nama << " mengunakan dash slash, mengurangi darah musuh menjadi " << musuh.darah << endl;
+              
+                if (item.buff==true ){
+                    item.buff=false;
+                }
                 system("pause");
             } else {
                 cout << "charge count tidak cukup" << endl;
@@ -320,7 +329,7 @@ void musuh_turn() {
             musuh.turn += 1;
             musuh.charge += 1;
             player.passive = rand() % 100 + 1;
-            if (player.passive < 10) {
+            if (player.passive < 20) {
                 cout << "PERFECT PARRY!!!" << endl;
                 cout << "knight berhasil menahan pukulan musuh" << endl;
             } else {
@@ -349,7 +358,7 @@ void musuh_turn() {
             musuh.charge -= 2;
             musuh.turn += 1;
             player.passive = rand() % 100 + 1;
-            if (player.passive < 10) {
+            if (player.passive < 20) {
                 cout << "PERFECT PARRY!!!" << endl;
                 cout << "knight berhasil menahan pentungan" << endl;
             } else {
