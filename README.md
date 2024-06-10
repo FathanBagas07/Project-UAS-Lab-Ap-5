@@ -19,6 +19,16 @@
 
 
 ## Screenshot
-![image](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/f7742498-ce43-4e94-9095-971d7b17763e)
+![Cuplikan layar 2024-06-09 163846](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/52facbda-ada1-4057-88e7-4a76a1a3634b)
+![Cuplikan layar 2024-06-09 164021](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/fcd9974b-ee97-4571-ada3-02a5e8eb3d90)
+![Cuplikan layar 2024-06-09 164034](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/02452320-40a7-409d-be7b-c5d3ca56f29b)
+![Cuplikan layar 2024-06-09 164053](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/4c77d6ce-8232-48cc-b46e-c535b891c8ee)
+![Cuplikan layar 2024-06-09 164116](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/2d814853-ca79-4576-9b09-094eb9ee8e30)
+![Cuplikan layar 2024-06-09 164253](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/e87806f1-edd3-4723-bb2f-453d10599526)
+![Cuplikan layar 2024-06-09 164342](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/333574c1-f6be-4338-865a-74f9052dd629)
+![Cuplikan layar 2024-06-10 162353](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/5dc0a100-9780-439a-936e-2c0c947070d3)
+
+
 
 ## Link Video
+https://drive.google.com/file/d/1YISAOiwUDAPQcgyUW4zgA1DKxmltDzzU/view?usp=drive_link
