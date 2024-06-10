@@ -11,6 +11,8 @@ struct Inventory {
     int health;
     int strength;
     bool buff;
+    string item_names[2] = {"Health Potion", "Strength Potion"};
+    int item_counts[2] = {4, 2};
 };
 
 struct Musuh {
@@ -73,23 +75,30 @@ void garis_panjang() {
     i = 0;
 }
 
+void show_inventory() {
+    for (int i = 0; i < 2; i++) {
+        cout << i+1 << ". " << item.item_names[i] << " (" << item.item_counts[i] << " buah)" << endl;
+    }
+    cout << "3. kembali" << endl;
+}
+
 int damage_player(Player player, Inventory item) {
     switch (player.skill) {
         case 1:
             if (item.buff == true) {
-                return 27;
+                return 17;
             } else {
                 return 15;
             }
         case 2:
             if (item.buff == true) {
-                return 35;
+                return 29;
             } else {
-                return 23;
+                return 24;
             }
         case 3:
             if (item.buff == true) {
-                return 32;
+                return 24;
             } else {
                 return 20;
             }
@@ -100,27 +109,27 @@ int damage_musuh(Musuh musuh) {
     switch (musuh.skill) {
         case 1:
             if (musuh.darah < 20) {
-                return 35;
+                return 30;
             } else if (musuh.darah < 30) {
-                return 17;
+                return 23;
             } else if (musuh.darah < 50) {
-                return 15;
+                return 19;
             } else if (musuh.darah < 65) {
-                return 13;
+                return 15;
             } else if (musuh.darah < 100) {
                 return 10;
             }
         case 2:
             if (musuh.darah < 20) {
-                return 45;
+                return 32;
             } else if (musuh.darah < 30) {
-                return 33;
+                return 28;
             } else if (musuh.darah < 50) {
-                return 30;
+                return 25;
             } else if (musuh.darah < 65) {
-                return 27;
+                return 22;
             } else if (musuh.darah < 100) {
-                return 24;
+                return 15;
             }
     }
 }
@@ -203,21 +212,19 @@ void player_turn() {
             }
             break;
         case 4:
-            if (item.health == 0 && item.strength == 0) {
+            if (item.item_counts[0] == 0 && item.item_counts[1] == 0) {
                 cout << "item habis" << endl;
                 system("pause");
                 player.lanjut = true;
             } else {
                 system("cls");
-                cout << "1. health potion (" << item.health << " buah): memulihkan HP sebesar 20" << endl;
-                cout << "2. stregth potion(" << item.strength << " buah): menambahkan damage sebesar 20% dari damage serangan" << endl;
-                cout << "3. kembali" << endl;
+                show_inventory();
                 cout << "pilih opsi: "; 
                 cin >> item.choice;
                 cout << endl;
                 switch (item.choice) {
                     case 1:
-                        if (item.health == 0) {
+                        if (item.item_counts[0] == 0) {
                             cout << "item habis" << endl;
                             system("pause");
                             player.lanjut = true;
@@ -226,7 +233,7 @@ void player_turn() {
                             if (player.darah >= 100) {
                                 temp = player.darah;
                                 player.darah = 100;
-                                item.health -= 1;
+                                item.item_counts[0] -= 1;
                                 player.turn += 1;
                                 player.charge += 1;
                                 cout << player.nama << " meminum health potion, memulihkan HP sebesar " << player.darah - temp << endl;
@@ -235,7 +242,7 @@ void player_turn() {
                             } else {
                                 player.turn += 1;
                                 player.charge += 1;
-                                item.health -= 1;
+                                item.item_counts[0] -= 1;
                                 cout << player.nama << " meminum health potion, memulihkan HP sebesar 20" << endl;
                                 cout << "darah player: " << player.darah << endl;
                                 system("pause");
@@ -243,7 +250,7 @@ void player_turn() {
                         }
                         break;
                     case 2:
-                        if (item.strength == 0) {
+                        if (item.item_counts[1] == 0) {
                             cout << "item habis" << endl;
                             system("pause");
                             player.lanjut = true;
@@ -251,7 +258,7 @@ void player_turn() {
                             player.turn += 1;
                             player.charge += 1;
                             item.buff = true;
-                            item.strength -= 1;
+                            item.item_counts[1] -= 1;
                             cout << player.nama << " meminum stregth potion, meningkatkan damage serangan selanjutnya" << endl;
                             system("pause");
                         }
@@ -273,6 +280,7 @@ void player_turn() {
             break;
     }
 }
+
 
 void musuh_turn() {
     system("cls");
@@ -329,7 +337,7 @@ void musuh_turn() {
             musuh.turn += 1;
             musuh.charge += 1;
             player.passive = rand() % 100 + 1;
-            if (player.passive < 20) {
+            if (player.passive < 10) {
                 cout << "PERFECT PARRY!!!" << endl;
                 cout << "knight berhasil menahan pukulan musuh" << endl;
             } else {
@@ -358,7 +366,7 @@ void musuh_turn() {
             musuh.charge -= 2;
             musuh.turn += 1;
             player.passive = rand() % 100 + 1;
-            if (player.passive < 20) {
+            if (player.passive < 10) {
                 cout << "PERFECT PARRY!!!" << endl;
                 cout << "knight berhasil menahan pentungan" << endl;
             } else {
