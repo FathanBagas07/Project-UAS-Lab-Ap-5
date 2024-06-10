@@ -17,7 +17,6 @@
 
 6. player menang jika dapat menghabisi darah lawan
 
-
 ## Screenshot
 ![Cuplikan layar 2024-06-09 163846](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/52facbda-ada1-4057-88e7-4a76a1a3634b)
 ![Cuplikan layar 2024-06-09 164021](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/fcd9974b-ee97-4571-ada3-02a5e8eb3d90)
