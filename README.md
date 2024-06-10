@@ -28,4 +28,4 @@
 ![Cuplikan layar 2024-06-10 191359](https://github.com/FathanBagas07/Project-UAS-Lab-Ap-5/assets/145728133/34cb3ecf-9707-42af-a123-f4f0388f160c)
 
 ## Link Video
-https://drive.google.com/file/d/1YISAOiwUDAPQcgyUW4zgA1DKxmltDzzU/view?usp=drive_link
+https://drive.google.com/file/d/1eYGaXOFMQIbjr7vYqleUMsjePJIGjIGO/view?usp=sharing
